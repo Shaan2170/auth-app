@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json());
 const users = [];
 
+<<<<<<< HEAD
 function logger(req,res,next){
     console.log(req.method+ "request came")
     next();
@@ -16,6 +17,8 @@ app.get("/", function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 })
 
+=======
+>>>>>>> f971a3112c7b72029a5bf97d59ca96016e7f09d7
 app.post("/signup",logger, function (req,res ){
     const username = req.body.username
     const password = req.body.password 
@@ -24,9 +27,14 @@ app.post("/signup",logger, function (req,res ){
         username: username,
         password: password
     })
+<<<<<<< HEAD
     res.json({
        message: "You are signed in" 
     })
+=======
+    res.json
+       message: "You are signed in" 
+>>>>>>> f971a3112c7b72029a5bf97d59ca96016e7f09d7
 })
 
 app.post("/signin",logger, function (req,res ){
@@ -48,7 +56,11 @@ app.post("/signin",logger, function (req,res ){
         return
     } else{
         const token = jwt.sign({
+<<<<<<< HEAD
             username: users[i].username
+=======
+            username
+>>>>>>> f971a3112c7b72029a5bf97d59ca96016e7f09d7
         }, JWT_SECRET);
 
         res.json({
@@ -71,6 +83,13 @@ function auth (req,res,next){
   }
 }
 
+<<<<<<< HEAD
+=======
+function logger(req,res,next){
+    console.log(req.method+ "request came")
+    next();
+}
+>>>>>>> f971a3112c7b72029a5bf97d59ca96016e7f09d7
 
 app.get("/me",auth,logger, function (req,res ){
    
@@ -87,4 +106,8 @@ app.get("/me",auth,logger, function (req,res ){
     })
 })
 
+<<<<<<< HEAD
 app.listen(3000);
+=======
+app.listen(3005);
+>>>>>>> f971a3112c7b72029a5bf97d59ca96016e7f09d7
