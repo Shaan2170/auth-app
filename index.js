@@ -7,6 +7,15 @@ const app = express();
 app.use(express.json());
 const users = [];
 
+function logger(req,res,next){
+    console.log(req.method+ "request came")
+    next();
+}
+
+app.get("/", function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+})
+
 app.post("/signup",logger, function (req,res ){
     const username = req.body.username
     const password = req.body.password 
@@ -15,8 +24,9 @@ app.post("/signup",logger, function (req,res ){
         username: username,
         password: password
     })
-    res.json
+    res.json({
        message: "You are signed in" 
+    })
 })
 
 app.post("/signin",logger, function (req,res ){
@@ -38,7 +48,7 @@ app.post("/signin",logger, function (req,res ){
         return
     } else{
         const token = jwt.sign({
-            username
+            username: users[i].username
         }, JWT_SECRET);
 
         res.json({
@@ -61,10 +71,6 @@ function auth (req,res,next){
   }
 }
 
-function logger(req,res,next){
-    console.log(req.method+ "request came")
-    next();
-}
 
 app.get("/me",auth,logger, function (req,res ){
    
@@ -81,4 +87,4 @@ app.get("/me",auth,logger, function (req,res ){
     })
 })
 
-app.listen(3005);
+app.listen(3000);
